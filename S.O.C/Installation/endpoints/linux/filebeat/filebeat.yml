@@ -1,0 +1,29 @@
+
+filebeat:
+  modules:
+    - module: suricata
+      eve:
+        enabled: true
+        var.paths: [ "/var/log/suricata/eve.json" ]
+
+# filebeat.autodiscover:
+#   providers:
+#     - type: docker
+#       hints.enabled: true
+
+
+# processors:
+#   - add_docker_metadata: ~
+#============================== Kibana =========================================
+setup.kibana:
+  host: "<replace_with_kibana_endpoint>:5601"
+  username: elastic
+  password: elastic
+
+
+
+
+output.elasticsearch:
+  hosts: ["<replace_with_elasticsearch_endpoint>:9200"]
+  username: elastic
+  password: elastic

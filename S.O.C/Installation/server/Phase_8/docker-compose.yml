@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  elastalert:
+    container_name: elastalert
+    network_mode: soc_net
+    restart: unless-stopped
+    image: ghcr.io/jertel/elastalert2/elastalert2:latest
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - ./elastalert/rules:/opt/elastalert/rules
+      - ./elastalert/elastalert.yaml:/opt/elastalert/config.yaml
+    environment:
+      - ELASTICSEARCH_USER=elastic
+      - ELASTICSEARCH_PASSWORD=elastic
+    command:
+      - "--config"
+      - "/opt/elastalert/config.yaml"
+
+
+
+

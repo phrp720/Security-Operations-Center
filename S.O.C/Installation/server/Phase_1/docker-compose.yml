@@ -1,0 +1,76 @@
+version: "3.8"
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=${ELASTICSEARCH_ADMIN_PASSWORD}
+      - http.host=${TESTING_HOST}
+      - xpack.monitoring.collection.enabled=true
+      - network.host=${TESTING_HOST}
+      - xpack.security.authc.api_key.enabled=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx5g"
+    volumes:
+      - elasticsearchdata:/usr/share/elasticsearch/data
+    networks:
+      - net
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:${VERSION}
+    restart: unless-stopped
+    depends_on:
+     - elasticsearch
+    environment:
+      - xpack.security.enabled=true
+      - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=a7a6311933d3503b89bc2dbc36572c33a6c10925682e591bffcab6911c06786d
+      - XPACK_SECURITY_ENCRYPTIONKEY=a7a6311933d3503b89bc2dbc36572c33a6c10925682e591bffcab6911c06786d
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_ADMIN_PASSWORD}
+      - xpack.encryptedSavedObjects.encryptionKey=aab22ca646b56ed294405a217415aad0
+      - xpack.reporting.encryptionKey=60311ff86ade1f71ddc26d0deb64ee16
+      - xpack.security.encryptionKey=d48ba37f1e16c31c774894ca522c65e7
+      - xpack.security.authc.api_key.enabled=true
+      - ELASTIC_HOSTS=http://${TESTING_HOST}:9200
+      - KIBANA_HOSTS=http://${TESTING_HOST}:5601
+      - LOGSTASH_HOSTS=http://logstash01:9600
+    labels:
+      co.elastic.logs/module: kibana
+    ports:
+      - 5601:5601
+    networks:
+      - net
+  logstash01:
+    container_name: logstash
+    restart: unless-stopped
+    depends_on:
+      - elasticsearch
+      - kibana
+    image: docker.elastic.co/logstash/logstash:${VERSION}
+    labels:
+      co.elastic.logs/module: logstash
+    user: root
+    volumes:
+      - logstashdata01:/usr/share/logstash/data
+      - "./logstash_ingest_data/:/usr/share/logstash/ingest_data/"
+      - "./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro"
+      - /var/log/osquery:/var/log/osquery
+    environment:
+      - xpack.monitoring.enabled=false
+      - ELASTIC_HOSTS=http://elasticsearch:9200
+    networks:
+      - net
+
+volumes:
+  elasticsearchdata:
+  logstashdata01:
+
+networks:
+  net:
+    name: soc_net
+    driver: bridge

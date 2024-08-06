@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+
+  filebeat01:
+    container_name: filebeat
+    image: docker.elastic.co/beats/filebeat:7.17.16
+    command: [ "--strict.perms=false"]
+    user: root
+    volumes:
+      - filebeatdata01:/usr/share/filebeat/data
+      - /var/log/suricata:/var/log/suricata
+      - "./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro"
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    environment:
+      - ELASTIC_HOSTS=http://<replace_with_elasticsearch_endpoint>:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=elastic
+      - KIBANA_HOSTS=http://<replace_with_kibana_endpoint>:5601
+
+
+volumes:
+   filebeatdata01:
+

@@ -1,0 +1,81 @@
+version: "3.8"
+services:
+
+  thehive:
+    image: strangebee/thehive:5.2
+    container_name: thehive
+    restart: unless-stopped
+    network_mode: soc_net
+    mem_reservation: 1500m
+    depends_on:
+    - cassandra
+    - minio
+    ports:
+      - "0.0.0.0:9000:9000"
+    environment:
+      - JVM_OPTS="-Xms1024M -Xmx1024M"
+    command:
+      - --es-username
+      - "${ELASTICSEARCH_USERNAME}"
+      - --es-password
+      - "${ELASTICSEARCH_PASSWORD}"
+      - --secret
+      - "lab123456789"
+      - "--cql-hostnames"
+      - "cassandra"
+      - "--index-backend"
+      - "elasticsearch"
+      - "--es-hostnames"
+      - "elasticsearch"
+      - "--s3-endpoint"
+      - "http://minio:9002"
+      - "--s3-access-key"
+      - "minioadmin"
+      - "--s3-secret-key"
+      - "minioadmin"
+      - "--s3-use-path-access-style"
+      - "--cortex-hostnames"
+      - "cortex.local"
+      - "--cortex-port"
+      - "9001"
+      - "--cortex-keys"
+      # put cortex api key once cortex is bootstraped
+      - "${CORTEX_APIKEY}"  ##Must be filled by us. Your API Key here
+    volumes:
+      - ../configs/thehive.conf:/etc/thehive/application.conf
+      #If you are familiar with the previous docker compose file you will note that the Cortex ports and keys have been omitted this is because we can now
+    #complete the integration from TheHive GUI directly.
+
+  cassandra:
+    image: 'cassandra:4'
+    container_name: cassandra
+    restart: unless-stopped
+    network_mode: soc_net
+    ports:
+      - "0.0.0.0:9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TheHive
+    volumes:
+      - cassandradata:/var/lib/cassandra
+
+
+
+  minio:
+    image: quay.io/minio/minio
+    restart: unless-stopped
+    network_mode: soc_net
+    container_name: minio
+    command: ["minio", "server", "/data", "--console-address", ":9002"]
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ADMIN_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ADMIN_PASSWORD}
+    ports:
+      - "0.0.0.0:9002:9002"
+    volumes:
+      - "miniodata:/data"
+
+
+volumes:
+  miniodata:
+  cassandradata:
+  thehivedata:

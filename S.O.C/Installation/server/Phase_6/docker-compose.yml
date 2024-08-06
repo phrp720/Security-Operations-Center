@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    user: root
+    volumes:
+      - mysqlfleet:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=fleet123
+      - MYSQL_DATABASE=fleet
+      - MYSQL_USER=fleet
+      - MYSQL_PASSWORD=fleet123
+    expose:
+      - 3306
+  redis:
+    image: redis:latest
+    volumes:
+      - redis2:/data
+    expose:
+      - 6379
+  fleet_oneshot:
+    container_name: fleet_oneshot
+    image: fleetdm/fleet:latest
+    command: 'fleet prepare db'
+    restart: 'no'
+    environment: &fleet_environment
+      - FLEET_MYSQL_ADDRESS=mysql:3306
+      - FLEET_MYSQL_DATABASE=fleet
+      - FLEET_MYSQL_USERNAME=root
+      - FLEET_MYSQL_PASSWORD=fleet123
+      - FLEET_REDIS_ADDRESS=redis:6379
+      - FLEET_SERVER_CERT=./fleet/server.cert
+      - FLEET_SERVER_KEY=./fleet/server.pem
+      - FLEET_OSQUERY_POLICY_UPDATE_INTERVAL=30s
+      - FLEET_LOGGING_JSON=true
+      - FLEET_OSQUERY_STATUS_LOG_PLUGIN=filesystem
+      - FLEET_FILESYSTEM_STATUS_LOG_FILE=/var/log/osquery/status.log
+      - FLEET_OSQUERY_RESULT_LOG_PLUGIN=filesystem
+      - FLEET_FILESYSTEM_RESULT_LOG_FILE=/var/log/osquery/results.log
+      - FLEET_LOGGING_DEBUG=true
+      - FLEET_ACTIVITY_ENABLE_AUDIT_LOG=true
+      - FLEET_ACTIVITY_AUDIT_LOG_PLUGIN=filesystem
+      - FLEET_FILESYSTEM_AUDIT_LOG_FILE=/var/log/osquery/audit.log
+      - FLEET_FILESYSTEM_ENABLE_LOG_ROTATION=true
+  fleet:
+    image: fleetdm/fleet:latest
+    container_name: fleet
+    restart: unless-stopped
+    user: root
+    volumes:
+      - ./fleet:/fleet
+      - /var/log/osquery:/var/log/osquery
+
+    environment: *fleet_environment
+    ports:
+      - "8080:8080"
+    depends_on:
+      fleet_oneshot:
+        condition: service_completed_successfully
+volumes:
+  mysqlfleet:
+  redis2:

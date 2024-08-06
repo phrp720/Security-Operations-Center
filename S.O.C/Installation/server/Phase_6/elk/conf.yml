@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: pack
+spec:
+  description: Osquery Monitoring
+  name: monitoring
+  queries:
+  - interval: 60
+    name: osquery_schedule_with_averages
+    query: osquery_schedule_with_averages
+    removed: false
+  targets:
+    labels:
+    - All Hosts
+---
+apiVersion: v1
+kind: query
+spec:
+  description: Retrieve statistics about scheduled queries.
+  name: osquery_schedule_with_averages
+  query: SELECT *, ifnull(system_time / executions, 0) AS average_system_time, ifnull(user_time
+    / executions, 0) AS average_user_time, ifnull(wall_time / executions, 0) AS average_wall_time
+    FROM osquery_schedule

@@ -1,0 +1,85 @@
+version: "3.8"
+services:
+
+
+  frontend:
+    image: ghcr.io/frikky/shuffle-frontend:latest
+    container_name: shuffle-frontend
+    hostname: shuffle-frontend
+    ports:
+      - "3001:80"
+      - "3443:443"
+    environment:
+      - BACKEND_HOSTNAME=shuffle-backend
+    restart: unless-stopped
+    network_mode: soc_net
+    depends_on:
+      - backend
+
+  backend:
+    image: ghcr.io/frikky/shuffle-backend:latest
+    container_name: shuffle-backend
+    hostname: shuffle-backend
+    ports:
+      - "5001:5001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./vol/shuffle-apps:/shuffle-apps
+      - ./vol/shuffle-files:/shuffle-files
+    environment:
+      - DATASTORE_EMULATOR_HOST=shuffle-database:8000
+      - SHUFFLE_APP_HOTLOAD_FOLDER=./shuffle-apps
+      - SHUFFLE_FILE_LOCATION=./shuffle-files
+      - ORG_ID=Shuffle
+      - SHUFFLE_APP_DOWNLOAD_LOCATION=https://github.com/frikky/shuffle-apps
+      - SHUFFLE_DEFAULT_USERNAME=admin
+      - SHUFFLE_DEFAULT_PASSWORD=admin
+      - SHUFFLE_DEFAULT_APIKEY=mysecretkey
+      - SHUFFLE_APP_FORCE_UPDATE=false
+      - HTTP_PROXY=
+      - SHUFFLE_ELASTIC=true
+      - SHUFFLE_OPENSEARCH_URL=http://elasticsearch:9200
+      - SHUFFLE_OPENSEARCH_USERNAME=elastic
+      - SHUFFLE_OPENSEARCH_PASSWORD=elastic
+      - HTTPS_PROXY=
+      - SHUFFLE_OPENSEARCH_SKIPSSL_VERIFY=true
+    restart: unless-stopped
+    network_mode: soc_net
+    depends_on:
+      - database
+
+  orborus:
+    image: ghcr.io/frikky/shuffle-orborus:latest
+    container_name: shuffle-orborus
+    hostname: shuffle-orborus
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - ORG_ID=Shuffle
+      - ENVIRONMENT_NAME=Shuffle
+      - BASE_URL=http://shuffle-backend:5001
+      - DOCKER_API_VERSION=1.40
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
+      - SHUFFLE_PASS_WORKER_PROXY=False
+      - SHUFFLE_ORBORUS_EXECUTION_TIMEOUT=600
+      - SHUFFLE_BASE_IMAGE_NAME=frikky
+      - SHUFFLE_BASE_IMAGE_REGISTRY=ghcr.io
+      - SHUFFLE_BASE_IMAGE_TAG_SUFFIX="-1.3.2"
+      - CLEANUP=false
+      - SHUFFLE_ELASTIC=true
+    restart: unless-stopped
+    network_mode: soc_net
+
+
+  database:
+    user: root
+    image: frikky/shuffle:database
+    container_name: shuffle-database
+    hostname: shuffle-database
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    network_mode: soc_net
+    volumes:
+      - ./vol/shuffle-database:/etc/shuffle

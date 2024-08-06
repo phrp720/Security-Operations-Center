@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+    suricata:
+        network_mode: host
+        cap_add:
+          - NET_ADMIN
+          - NET_RAW
+          - SYS_NICE
+        devices:
+          - /dev/net/tun
+        image: 'jasonish/suricata:7.0.2'
+        command: '/usr/bin/suricata  suricata  -c /etc/suricata/suricata.yaml -q 0 '
+        container_name: suricata_ips
+        volumes:
+          - /var/log/suricata:/var/log/suricata
+          - ./rules/custom.rules:/var/lib/suricata/rules/custom.rules
+          - ./suricata.yaml:/etc/suricata/suricata.yaml
+

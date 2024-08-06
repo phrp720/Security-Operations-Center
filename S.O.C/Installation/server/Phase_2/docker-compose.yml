@@ -1,0 +1,96 @@
+version: "3.8"
+services:
+
+  #appended .local onto the container name because when we integrate cortex with TheHive using the new GUI menu it only accept a FQDN.
+  cortex:
+    image: custom-cortex:latest
+    restart: unless-stopped
+    network_mode: soc_net
+    container_name: cortex.local
+    environment:
+      - job_directory=/tmp/cortex-jobs
+      - docker_job_directory=/tmp/cortex-jobs
+    volumes:
+      #For analyzers and responders (called neurons, also based on docker containers) to work, we need to bind the hosts docker socket into the cortex container
+      #so it can use the docker service of the host, and share the job directory between the container and the host.
+      #An alternative way of doing this would be to run docker (neurons) within the cortex docker container (docker-ception), the container will need to be run in
+      #privileged mode and you will need the --start-docker parameter for this work. It is however not advised to run docker containers in priviliged mode because it
+      #grants the docker container root capabilities over the host system which is a security risk.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./sharedfiles/tmp/cortex-jobs:/tmp/cortex-jobs
+      - ./sharedfiles/cortex/logs:/var/log/cortex
+      - ../configs/cortex.conf:/etc/cortex/application.conf
+    ports:
+      - "9001:9001"
+
+
+  #appended .local onto the container name because when we integrate MISP with TheHive using the new GUI menu it only accepts a FQDN.
+  misp.local:
+    image: coolacid/misp-docker:core-latest
+    restart: unless-stopped
+    network_mode: soc_net
+    container_name: misp.local
+    depends_on:
+      - misp_mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./sharedfiles/server-configs/:/var/www/MISP/app/Config/"
+      - "./sharedfiles/logs/:/var/www/MISP/app/tmp/logs/"
+      - "./sharedfiles/files/:/var/www/MISP/app/files"
+      - "./sharedfiles/ssl/:/etc/nginx/certs"
+    environment:
+      - MYSQL_HOST=misp_mysql
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MISP_ADMIN_EMAIL=${MISP_ADMIN_EMAIL}
+      - MISP_ADMIN_PASSPHRASE=${MISP_ADMIN_PASSPHRASE}
+      - MISP_BASEURL=${MISP_BASEURL}
+      - TIMEZONE=Europe/London
+      - "INIT=true"
+      - "CRON_USER_ID=1"
+      - "REDIS_FQDN=redis"
+      - "HOSTNAME=https://0.0.0.0"
+
+
+  misp_mysql:
+    image: mysql/mysql-server:5.7
+    restart: unless-stopped
+    network_mode: soc_net
+    container_name: misp_mysql
+    volumes:
+      - mispsqldata:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - redis:/data
+    expose:
+      - 6379
+    network_mode: soc_net
+
+  misp-modules:
+    image: coolacid/misp-docker:modules-latest
+    container_name: misp-modules
+    restart: unless-stopped
+    environment:
+      - "REDIS_BACKEND=redis"
+    network_mode: soc_net
+    depends_on:
+      - redis
+      - misp_mysql
+
+
+volumes:
+  mispsqldata:
+  redis:
+
+

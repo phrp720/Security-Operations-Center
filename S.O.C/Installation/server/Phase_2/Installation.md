@@ -59,5 +59,8 @@ Cortex Admin :
 <hr>
 
 In production mode we need to change the hostname enviroment variable in the misp service to the hostname of the server.
-###### Inside this folder there is a .env file with some changable enviroment variables(such as the ELK admin Password , ELK version etc).
+######
+> [!TIP]
+> 
+> Inside this folder there is a .env file with some changable enviroment variables(such as the ELK admin Password , ELK version etc).
 

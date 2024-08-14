@@ -28,6 +28,7 @@ and docker will do the rest for you.
 You can add rules for elastalert in the /Phase_8/elastalert/rules folder .
 
 
-
-###### Inside this folder there is a elastalert folder .That folder contains the rules of alerts and the configuration of elastalert.
+> [!TIP]
+>
+> Inside this folder there is a elastalert folder .That folder contains the rules of alerts and the configuration of elastalert.
 

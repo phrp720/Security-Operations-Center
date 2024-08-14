@@ -53,6 +53,9 @@ To see the default interface
 
     ip -p -j route show default
 
-###### Inside this folder there is a .env file with some changable enviroment variables(such the interface etc).
-###### suricata.yml files are the configuration for each suricata instance.
+> [!TIP]
+>
+>Inside this folder there is a .env file with some changable enviroment variables(such the interface etc).
+> 
+>suricata.yml files are the configuration for each suricata instance.
 

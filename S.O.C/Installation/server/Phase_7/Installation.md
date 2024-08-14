@@ -32,6 +32,7 @@ from the filebeat commands and rerun filebeat with the command:
 <hr>
 
 
-
-###### Inside this folder there is a filebeat.yml file .That file is the configuration of Filebeat.
+> [!TIP]
+>
+>  Inside this folder there is a filebeat.yml file .That file is the configuration of Filebeat.
 

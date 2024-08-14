@@ -58,5 +58,7 @@ MinIO
 
 <hr>
 
-###### Inside this folder there is a .env file with some changable enviroment variables(such as the ELK admin Password , version etc).
+> [!TIP]
+>
+>  Inside this folder there is a .env file with some changable enviroment variables(such as the ELK admin Password , version etc).
 

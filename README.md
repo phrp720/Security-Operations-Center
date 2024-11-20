@@ -13,7 +13,7 @@
 
 ## About
 
-This project was developed as part of my Bachelor's thesis. It represents a significant effort to create a comprehensive, open-source solution for cybersecurity operations, making advanced security tools accessible to a broader audience.
+This project was developed as part of my Bachelor's thesis. It represents a significant effort to create a comprehensive, **open-source** solution for cybersecurity operations, making advanced security tools accessible to a broader audience.
 
 ## Project Goal
 

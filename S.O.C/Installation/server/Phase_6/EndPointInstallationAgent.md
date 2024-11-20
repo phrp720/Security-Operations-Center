@@ -1,5 +1,4 @@
-
-## Fleetd agent installation
+# Fleetd agent Generator
 
 Please run then inside the ./fleet folder because we need the server.cert file for develop environment
 for windows:
@@ -16,6 +15,6 @@ Before you run the  excecutable to the endpoint be sure to add the following lin
         {local_IP_of_fleetServer} fleet.com
 
 
-Path of hosts for linux : /etc/hosts 
+Path of hosts for linux : `/etc/hosts` 
 
-Path of hosts for Windows : c:\Windows\System32\Drivers\etc\hosts
+Path of hosts for Windows : `C:\Windows\System32\Drivers\etc\hosts`

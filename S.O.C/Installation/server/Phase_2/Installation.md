@@ -1,31 +1,22 @@
 
 # Phase 2 - Cortex/Misp
 
-
-### This is the second phase of our S.O.C. installation.
-
-
-#### In this phase we will setup our:
-- Observable Analysis and Active Response engine(Cortex)
-- Threat intelligence tool(MISP).
+## Installation
 
 The tools that we are going to install are:
 
 - Cortex
 - MISP
-<hr>
-
-## Installation
 
 Steps:
 
 1) Create the custom Cortex image that contains python,pip and the analyzers/repsonders repo.
-   Inside the folder ./Phase_2 run the command below:
+   Inside the folder `./Phase_2` run the command below:
     
         docker build -t custom-cortex:latest .
    
 
-3)  Then run the docker compose file inside the folder ./Phase_2/docker-compose.yml with the command :
+2) Then run the docker compose file inside the folder ./Phase_2/docker-compose.yml with the command :
 
         sudo docker-compose -p "soc" up -d
 
@@ -44,22 +35,21 @@ Example for MISP analyzer:
 
 ### Tools' Urls
 
-- Cortex: http://localhost:9001/index.html#!/login
-- MISP https://0.0.0.0/users/login
-- 
+| Tool   | URL                                      |
+|--------|------------------------------------------|
+| Cortex | http://localhost:9001/index.html#!/login |
+| MISP   | https://0.0.0.0/users/login              |
+
 ### Credentials
-Cortex Admin :
 
-- We will set it at the start
+| Service      | Username                    | Password |
+|--------------|-----------------------------|----------|
+| Cortex Admin | We will set it at the start | -        |
+| MISP Admin   | admin@admin.test            | admin    |
 
-  MISP Admin:
+> [!Warning]
+>In production mode we need to change the hostname enviroment variable in the misp service to the hostname of the server.
 
-- admin@admin.test
-- admin
-<hr>
-
-In production mode we need to change the hostname enviroment variable in the misp service to the hostname of the server.
-######
 > [!TIP]
 > 
 > Inside this folder there is a .env file with some changable enviroment variables(such as the ELK admin Password , ELK version etc).

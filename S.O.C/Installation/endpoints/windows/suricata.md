@@ -1,6 +1,18 @@
-## Suricata Windows Installation
+# Suricata Windows Installation
 
-### 1. Install Npcap
+<details>
+<summary>Table of Contents</summary>
+
+1. [Install Npcap](#1-install-npcap)
+2. [Install Suricata](#2-install-suricata)
+3. [Configure Custom Rules](#3-configure-custom-rules)
+4. [Modify Suricata Configuration](#4-modify-suricata-configuration)
+5. [Run Suricata](#5-run-suricata)
+6. [Run Suricata as a service(Optional)](#run-suricata-as-a-serviceoptional)
+
+</details>
+
+## 1. Install Npcap
 
 Npcap is a packet capture library for Windows. Suricata relies on this library to capture network packets in real-time. Without Npcap, Suricata would not be able to inspect network traffic.
 
@@ -13,7 +25,7 @@ Npcap is a packet capture library for Windows. Suricata relies on this library t
    (c) During the installation,ensure that the checkbox option "Install Npcap with WinPcap API-compatibility Mode" is selected.
    
 ![npcap_checkboxes.png](.hiddenIMG/npcap_checkboxes.png)
-### 2. Install Suricata
+## 2. Install Suricata
 
 Suricata is an open-source network threat detection engine. Installing it on your system allows you to monitor network traffic for suspicious activities. Choosing the default installation path ensures that the subsequent steps will work as described.
 
@@ -28,7 +40,7 @@ Suricata is an open-source network threat detection engine. Installing it on you
   (c) Install Suricata. The default installation path should be C:\Program Files\Suricata
 
 
-### 3. Configure Custom Rules
+## 3. Configure Custom Rules
 
 
 Custom rules allow you to define specific network traffic patterns that you want Suricata to detect. By placing custom.rules in the Suricata rules directory, you ensure that Suricata can find and apply these rules when it runs.We also use these dummy rules for easiest observation of the S.O.C in dev mode.
@@ -38,7 +50,7 @@ Custom rules allow you to define specific network traffic patterns that you want
      (b) Paste the custom.rules file into the folder C:\Program Files\Suricata\rules.
 
 
-### 4. Modify Suricata Configuration
+## 4. Modify Suricata Configuration
 
 Editing the suricata.yaml file to use only custom.rules ensures that Suricata only uses the rules you’ve defined, ignoring all others. This is useful for testing specific rules or maintaining a minimal rule set for clarity and performance.
 
@@ -56,7 +68,7 @@ Editing the suricata.yaml file to use only custom.rules ensures that Suricata on
 
 
 
-### 5. Run Suricata
+## 5. Run Suricata
 
 Running Suricata with the specified IP address allows it to monitor network traffic on that specific interface. This setup is crucial for ensuring that Suricata inspects the traffic flowing to and from the protected network segment. Using the IP address directly (instead of interface names like in Linux) is specific to how network interfaces are identified in Windows.
 
@@ -85,7 +97,7 @@ For example, if your IP address is 192.168.2.110, the command will be:
 
 Now suricata will still running until we press Ctrl+C to the powershell or if we close the powershell window.
 
-### Run suricata as a service(Optional)
+## Run suricata as a service(Optional)
 
 
 (1) Excecute the command below:

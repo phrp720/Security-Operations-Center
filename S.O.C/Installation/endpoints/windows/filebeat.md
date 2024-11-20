@@ -1,8 +1,18 @@
-## Filebeat Windows Installation
+# Filebeat Windows Installation
+
 
 This guide provides step-by-step instructions for installing and configuring Filebeat 7.17 on Windows. Filebeat is a lightweight shipper for forwarding and centralizing log data. Once installed, you can specify the location of your log files and visualize the log data in Kibana.
 
-### Step 1: Install Filebeat
+<details>
+<summary>Table of Contents</summary>
+
+1. [Install Filebeat](#step-1-install-filebeat)
+2. [Configure Filebeat](#step-2-configure-filebeat)
+3. [Start Filebeat](#step-3-start-filebeat)
+
+</details>
+
+## Step 1: Install Filebeat
     
 1. Download Filebeat
 Download the Filebeat Windows zip file from the [official downloads page](https://www.elastic.co/downloads/beats/filebeat).
@@ -20,7 +30,7 @@ If script execution is disabled on your system, you need to set the execution po
 PowerShell.exe -ExecutionPolicy UnRestricted -File .\install-service-filebeat.ps1
 
 
-### Step 2: Configure Filebeat
+## Step 2: Configure Filebeat
 
 1. Copy Configuration File
 Replace the filebeat.yml configuration file from the provided path to the Filebeat installation directory:
@@ -30,7 +40,7 @@ Replace the filebeat.yml configuration file from the provided path to the Filebe
 
 Ensure that you have the administrator privileges while you do this .
 
-### Step 3: Start Filebeat
+## Step 3: Start Filebeat
     
 1. Modify User Credentials
 

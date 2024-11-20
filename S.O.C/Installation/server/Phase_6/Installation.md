@@ -1,16 +1,14 @@
 # Phase 6 - Osquery/FleetDM
 
-
-### This is the sixth phase of our S.O.C. installation.
-
-
 In this phase we will setup our EDR Tool with its prerequires.
 
-The tools that we are going to install are: 
+The tools that we are going to install are:
 
 - FleetDM
 - Redis
 - Osquery
+
+## Prerequisites
 
 ### Installation of npm and fleetctl
 
@@ -56,7 +54,7 @@ Steps for a valid certificate for fleet:
         127.0.0.1 fleet.com
 
 
-### Installation
+## Installation
 
 Then the only thing that you have to do is to run the docker compose files inside the folder ./Phase_6 with the command :
 
@@ -74,9 +72,9 @@ Linux Example:
 
 <hr>
 
-### Dashboard Installation
+## Dashboard Installation
 
-#### Steps for kibana and elasticsearch
+### Steps for kibana and elasticsearch
 
 - Add .cert to /etc/ssl/certs to be trusted by the system
 

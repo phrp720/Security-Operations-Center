@@ -1,23 +1,19 @@
 
 # Phase 4 - Shuffle
 
-### This is the 4th phase of our S.O.C. installation.
+## Installation
 
-#### In this phase we will setup our SOAR .
+In this phase we will setup our SOAR .
 
 The tool that we are going to install is:
 
 - Shuffle
 
-<hr>
 
-## Installation
 The only thing that you have to do is to run the docker compose file inside the folder ./Phase_4/docker-compose.yml with the command :
 
     cd S.O.C/Installation/Phase_4
     sudo docker-compose -p "soc" up -d
-
-
 
 
 and docker will do the rest for you.

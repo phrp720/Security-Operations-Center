@@ -6,14 +6,17 @@
 1. [About](#about)
 2. [Project Goal](#project-goal)
 3. [What is a SOC?](#what-is-a-soc)
-4. [Contributing](#contributing)
-5. [Architecture Diagram](#architecture-diagram)
+4. [Architecture Diagram](#architecture-diagram)
+5. [Contributing](#contributing)
+
 
 </details>
 
 ## About
 
 This project was developed as part of my Bachelor's thesis. It represents a significant effort to create a comprehensive, **open-source** solution for cybersecurity operations, making advanced security tools accessible to a broader audience.
+
+All the tools used for this project are Open-Source and free.
 
 ## Project Goal
 
@@ -33,13 +36,16 @@ A Security Operations Center (SOC) is a centralized unit within an organization 
   <img src="./soc_architecture_diagram.png" alt="SOC Architecture Diagram" />
 </p>
 
-## Contributing
-
-Contributions are welcomed! If you have ideas, improvements, or fixes, feel free to open an issue or submit a pull request.
+You can find the technology stack [here](https://github.com/phrp720/soc-toolkit/blob/main/technology_stack.md)
 
 > [!Warning]
 >
 > This project involves the use of multiple Docker images, each requiring substantial computational resources for optimal performance. If your system does not have sufficient resources (CPU, RAM, and storage), there is a risk of instability or crashes. It is strongly recommended to ensure your system meets the necessary resource requirements before deploying these images.
+
+## Contributing
+
+Contributions are welcomed! If you have ideas, improvements, or fixes, feel free to open an issue or submit a pull request.
+
 
 Thank you for visiting!!
 

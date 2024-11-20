@@ -6,8 +6,8 @@
 1. [About](#about)
 2. [Project Goal](#project-goal)
 3. [What is a SOC?](#what-is-a-soc)
-4. [Architecture Diagram](#architecture-diagram)
-5. [Contributing](#contributing)
+4. [Contributing](#contributing)
+5. [Architecture Diagram](#architecture-diagram)
 
 </details>
 
@@ -33,13 +33,13 @@ A Security Operations Center (SOC) is a centralized unit within an organization 
   <img src="./soc_architecture_diagram.png" alt="SOC Architecture Diagram" />
 </p>
 
-> [!Warning]
->
-> This project involves the use of multiple Docker images, each requiring substantial computational resources for optimal performance. If your system does not have sufficient resources (CPU, RAM, and storage), there is a risk of instability or crashes. It is strongly recommended to ensure your system meets the necessary resource requirements before deploying these images.
-
 ## Contributing
 
 Contributions are welcomed! If you have ideas, improvements, or fixes, feel free to open an issue or submit a pull request.
 
-Thank you for visiting!
+> [!Warning]
+>
+> This project involves the use of multiple Docker images, each requiring substantial computational resources for optimal performance. If your system does not have sufficient resources (CPU, RAM, and storage), there is a risk of instability or crashes. It is strongly recommended to ensure your system meets the necessary resource requirements before deploying these images.
+
+Thank you for visiting!!
 

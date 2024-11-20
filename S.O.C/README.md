@@ -1,43 +1,33 @@
 # Installation Guide
 
-Welcome to the setup guide for our SOC (Security Operations Center). This README will walk you through the process of setting up the Linux Server and registering endpoints for both Windows and Linux systems.
+This guide will walk you through the process of setting up the Linux server and registering endpoints for both Windows and Linux systems.
 
-## Table of Contents
+<details>
+<summary>Table of Contents</summary>
 
 1. [Server Setup](#server-setup)
-2. [Endpoints Setup](#endpoint-installation)
-    - [Windows Installation](#windows-installation)
-    - [Linux Installation](#linux-installation)
+2. [Endpoints Setup](#endpoints-setup)
+   - [Windows Installation](#windows-installation)
+   - [Linux Installation](#linux-installation)
 
-### Server Setup
+</details>
 
-First, we need to set up the server where our SOC will be installed.The server a unix system.
+## Server Setup
 
-Follow these steps below to complete the server setup:
+First, we need to set up the server where the SOC will be installed.
 
-1. Navigate to the `./Installation/server` directory:
-   
-         cd ./Installation/server
-- Follow the instructions in the README.md file located in the ./Installation/server directory to complete the server installation.
+Follow the steps and phases located [here](./Installation/server/README.md) to set up the server.
 
 After completing the server setup, proceed to the next section to register and protect the endpoints.
 
-### Endpoints Setup
+## Endpoints Setup
 
+The next step is to set up the endpoints that will be monitored by the SOC. We have two types of endpoints: Windows and Linux.
 
-The ./endpoints directory contains the installation processes for both Windows and Linux systems. Follow the appropriate instructions for your operating system to register and protect your endpoints with our SOC.
+### Windows Installation
 
-#### Windows Installation
-Navigate to the ./Installation/endpoints/windows directory:
+For Windows endpoint setup, follow the instructions located [here](./Installation/endpoints/windows/README.md).
 
-      cd ./Installation/endpoints/windows
+### Linux Installation
 
-Follow the instructions in the README.md file located in the ./Installation/endpoints/windows directory to complete the endpoint installation for Windows systems.
-
-#### Linux Installation
-Navigate to the  ./Installation/endpoints/linux directory:
-
-      cd ./Installation/endpoints/linux
-
-Follow the instructions in the README.md file located in the /Installation/endpoints/linux directory to complete the endpoint installation for Linux systems.
-
+For Linux endpoint setup, follow the instructions located [here](./Installation/endpoints/linux/README.md).

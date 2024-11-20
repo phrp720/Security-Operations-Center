@@ -1,19 +1,12 @@
-### To configure and setup a Linux endpoint,you must have install :
+# Linux  Installation
 
-* curL
-* docker
-* docker-compose
-* a firewall(iptables)
+## To configure and setup a Linux endpoint,you must have install :
 
-
-## Linux  Installation
-run in terminal all the below commands in order specified.
-
-- #### cURL
+- ### cURL
 
       sudo apt install curl
 
-- #### Docker
+- ### Docker
 
     1)      sudo apt-get install docker.io
 
@@ -23,7 +16,7 @@ run in terminal all the below commands in order specified.
 
     4)     newgrp docker
 
-- #### Docker-compose
+- ### Docker-compose
 
     1)      sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
@@ -32,28 +25,27 @@ run in terminal all the below commands in order specified.
 
 - ### Firewall(iptables)
 
-         sudo apt-get install  iptables-persistent
+      sudo apt-get install  iptables-persistent
 
 - ###  Suricata
 
-        You can find the installation process in the Installation.md file in the ./linux/suricata folder.    
+  You can find the suricata installation process [here](./suricata/Installation.md).    
 
 - ###  Filebeat
 
-
-            You can find the installation process in the Installation.md file in the ./linux/filebeat folder.
+  You can find the filebeat installation process [here](./filebeat/Installation.md).
 
 - ###  Fleetd agent
 
 Go to the server that SOC is installed  and generate a fleetd agent for windows with the following command:
 
-        sudo fleetctl package --type=deb --enable-scripts --fleet-desktop --fleet-url=https://fleet.com:8080 --enroll-secret={your_enroll_secrect} --fleet-certificate=server.cert
+    sudo fleetctl package --type=deb --enable-scripts --fleet-desktop --fleet-url=https://fleet.com:8080 --enroll-secret={your_enroll_secrect} --fleet-certificate=server.cert
 
 Before you install the  .deb file to the endpoint be sure to add the following line to the hosts of your OS
 
-        {local_IP_of_fleetServer} fleet.com
+    {local_IP_of_fleetServer} fleet.com
 
-Path of hosts for linux : /etc/hosts 
+Path of hosts for linux : `/etc/hosts `
 
 
 

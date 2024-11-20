@@ -1,22 +1,16 @@
-
 # Phase 3 - Incident Responce Tool
 
-### This is the third phase of our S.O.C. installation.
-
+## Installation
 
 In this phase we will setup our Incident Responce Tool with its prerequires.
 
-The tools that we are going to install are: 
+The tools that we are going to install are:
 
 - TheHive
 - Cassandra (The noSql database of TheHive)
 - minIo (The storange and management tool of large files for TheHive)
 
-<hr>
 
-
-
-## Installation
 The only thing that you have to do is to run the docker compose file inside the folder ./Phase_3/docker-compose.yml with the command :
 
     cd S.O.C/Installation/Phase_3
@@ -41,24 +35,20 @@ Steps:
   
 * Hit apply and save.
 
-
 ### Tools' Urls
 
-- MinIO http://localhost:9002
-- TheHive http://localhost:9000/index.html#!/login
+| Tool    | URL                                      |
+|---------|------------------------------------------|
+| MinIO   | http://localhost:9002                    |
+| TheHive | http://localhost:9000/index.html#!/login |
 
 ### Credentials
-TheHive
-* Default Admin : admin@thehive.local
-* Password : secret
 
-MinIO
-* Admin : minioadmin
-* Password : minioadmin
-
-<hr>
+| Service       | Username            | Password   |
+|---------------|---------------------|------------|
+| TheHive Admin | admin@thehive.local | secret     |
+| MinIO Admin   | minioadmin          | minioadmin |
 
 > [!TIP]
->
 >  Inside this folder there is a .env file with some changable enviroment variables(such as the ELK admin Password , version etc).
 

@@ -1,5 +1,23 @@
 # S.O.C Endpoints
 
+<details>
+<summary>Table of Contents</summary>
+
+1. [Overview](#overview)
+2. [Purpose of Each Tool](#purpose-of-each-tool)
+   - [Suricata](#suricata)
+   - [Filebeat](#filebeat)
+   - [Fleetd Agent](#fleetd-agent)
+3. [Installation Process](#installation-process)
+   - [Windows and Linux Installation Guides](#windows-and-linux-installation-guides)
+   - [Summary of Installation Steps](#summary-of-installation-steps)
+     - [Suricata Installation](#suricata-installation)
+     - [Filebeat Installation](#filebeat-installation)
+     - [Fleetd Agent Installation](#fleetd-agent-installation)
+4. [Conclusion](#conclusion)
+
+</details>
+
 ## Overview
 
 To ensure full functionality and protection of our Security Operations Center (S.O.C.) endpoints, the following three tools must be installed:

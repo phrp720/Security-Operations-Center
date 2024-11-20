@@ -1,24 +1,20 @@
-### To configure and setup a windows endpoint,you must have install :
+# Windows Installation
 
-- Suricata
-- Filebeat
-- Fleetd agent
+## To configure and setup a windows endpoint,you must have install :
 
-
-## Windows Installation
-
-- #### Suricata
+- ### Suricata
 
         Follow the installation instructions in the README.md file in the folder ./windows/suricata
 
 
-- #### Filebeat
+- ### Filebeat
 
-        Follow the installation instructions in the README.md file in the folder ./windows/filebeat
+        
+Follow the installation instructions in the README.md file in the folder ./windows/filebeat
 
 
 
-- #### Fleetd agent
+- ### Fleetd agent
 
 Go to the server that SOC is installed  and generate a fleetd agent for windows with the following command:
 
@@ -28,6 +24,6 @@ Before you run the  .msi excecutable to the endpoint be sure to add the followin
 
         {local_IP_of_fleetServer} fleet.com
 
-Path of hosts for Windows : c:\Windows\System32\Drivers\etc\hosts
+Path of hosts for Windows : `${HOME}:\Windows\System32\Drivers\etc\hosts`
 
 

@@ -5,9 +5,10 @@
 
 1. [About](#about)
 2. [Project Goal](#project-goal)
-3. [What is a SOC?](#what-is-a-soc)
-4. [Architecture Diagram](#architecture-diagram)
-5. [Contributing](#contributing)
+3. [Installation](#installation)
+4. [What is a SOC?](#what-is-a-soc)
+5. [Architecture Diagram](#architecture-diagram)
+6. [Contributing](#contributing)
 
 
 </details>
@@ -21,6 +22,10 @@ All the tools used for this project are Open-Source and free.
 ## Project Goal
 
 The primary objective of this project is to develop a fully operational Security Operations Center (SOC) using open-source tools. The goal is to containerize these tools, enabling users to deploy the entire SOC with a single click. By leveraging Docker, this project ensures seamless deployment across various environments, making the SOC portable and easy to use.
+
+## Installation
+
+To install the SOC follow the Installation Guide [here](https://github.com/phrp720/soc-toolkit/blob/main/S.O.C/README.md)
 
 ## What is a SOC?
 

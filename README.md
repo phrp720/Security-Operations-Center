@@ -1,6 +1,6 @@
-# Open-Source Security Operations Center (SOC)
+<h1 align="center">Open-Source Security Operations Center (SOC)</h1>
 
-<details>>
+<details>
 <summary>Table of Contents</summary>
 
 1. [About](#about)
